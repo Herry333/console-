@@ -4,17 +4,14 @@ var userList=[
         password:"123",
     },
 ];
-var input=prompt('SignIn / Login');
 var a =true;
 while(a){
     var input=prompt('SignIn / Login/ Quit');
-    debugger
-
     if(input==="signin"){
-        debugger
         userName=prompt("Enter UserName");
         password=prompt("enter Password");
         userList.push({username:userName , passowrd:password});
+        console.log(`UserName :${userName} -- Password: ${password}`);
     }
     
     else if (input==='login'){
@@ -23,8 +20,10 @@ while(a){
         //userList.indexOf({username:userNameLogin});
         for(let i=0;i<userList.length;i++){
             if(userList[i].userName===userNameLogin && userList[i].password ===passwordLogin){
-            console.log("welcome");
+            // console.log("welcome");
+            
             }
+            else{console.log("invalid Email or Password");}
         } 
     }
     else if (input==='quit')
