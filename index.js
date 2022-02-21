@@ -5,13 +5,7 @@ var userList=[
         password:"123",
     },
 ];
-var products=[
-    {
-        pName:"mmm",
-        pId:0,
-        pQuantity:5,
-    },
-]
+var products=[];
 var a =true;
 var flag=false;
 while(a){
@@ -26,44 +20,80 @@ while(a){
     else if (input==='login'){
         let userNameLogin=prompt("Enter UserName");
         let passwordLogin=prompt("Enter Password");
-        for( element of userList){
+        for( element of userList)
+        {
             if( element.userName===userNameLogin && element.password===passwordLogin){
                 flag=true;
                 console.log(`welcome ${element.userName}`);
-                console.log(`Press 1 to add product`);
+                while( z=true){
+                console.log(`Press 1 to sell product`);
                 console.log(`Press 2 to buy products`);
-                console.log(`Press 3 to sell product`);
-                console.log(`Press 4 to sell products on discount`);
+                // console.log(`Press 4 to sell products on discount`);
                 console.log(`Press 5 to see Inventory`);
-                let option=parseInt(prompt(" What u want to do 1/2/3/5 "));
+                let option=parseInt(prompt(" What u want to do 1/2/5 "));
                 if(option==1)
                 {
-                    // var product=[{pName:"asd",pId:0,pQuantity:5},];
-                    //  [
-                    //      {pId,pName,pQuantity}
-                    //  ];
                     let name=prompt(`Enter Product Name`);
                     let id=parseInt(prompt(`Enter Product ID`));
+                    let cost=parseInt(prompt(`Enter Cost of product`));
                     let quantity=parseInt(prompt(`How much  ${name} you want to add`));
-                    products.push({pName:name,pId:id,pQuantity:quantity});
-                 }
-                if(option==5){
-                    debugger
-                    for(product of products){
-                    console.log(` ID:${product.pId} NAME : ${product.pName} and  Quantity :${product.pQuantity} `);
+                    products.push({pName:name, pId:id, pCost:cost ,pQuantity:quantity});
+                    console.log(`${products.pName}item added in the list`);
+                }
+                if(option==5)
+                {
+                    for(let product of products){
+                    console.log(`ID:${product.pId} NAME:${product.pName} Price:${product.pCost} and  Quantity :${product.pQuantity} `);
                     }
                 }
-                if(option==2){}
-                if(option==3){}
+                if(option==2)
+                {
+                    let sum=0;
+                    console.log(`---LIST---`)
+                    for(let product of products)
+                    {
+                        console.log(`ID:${product.pId} NAME:${product.pName} Price:${product.pCost} and  Quantity :${product.pQuantity} `);
+                    }
+                    let itemToBuy=parseInt(prompt(`Enter the ID of product you want to buy`));
+                    for(z of products)
+                    {
+                        if (z.pId===itemToBuy)
+                        {
+                            if(z.pQuantity>0)
+                            {
+                                buyQuantity=parseInt(prompt(`how much you need `));
+                                z.pQuantity = z.pQuantity-buyQuantity;
+                                console.log(`---------------------your cart-------------`);
+                                sum=z.pCost * buyQuantity;
+                                console.log(`Name:${z.pName} Qty:${buyQuantity}Total :Rs ${sum}`);
+                                console.log(`thanks for buying `);
+                            }else
+                            {
+                                console.log(`Out of stock`);
+                            }
+                        }
+                        else
+                        {
+                            console.log(`sorry these is no such product in the store`);
+                        }         
+                    }
+                }
+                let m=prompt("logout ?");
+                if (m=='yes'){
+                    z=false; 
+                }
                 }
             }
-            if (flag==false){
-                console.log("invalid Username/ PAssword");
-            }
         }
-        else if (input==='quit')
+
+        if (flag==false)
         {
-            a=false;
+            console.log("invalid Username/ PAssword");
         }
     }
-    console.log("quit application");
+    else if (input==='quit')
+    {
+        a=false;
+    }
+}
+console.log("quit application");
